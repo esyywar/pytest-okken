@@ -3,20 +3,14 @@ import tasks
 from tasks import Task
 
 
-task_count_params = [
-    [Task('one job')],
-    [Task('one job'), Task('two jobs')],
-    [Task('one job'), Task('two jobs'), Task('three jobs')]]
+def test_count(db_4_tasks):
+    """Connected 4 task db should have 4 tasks"""
+    assert(tasks.count() == 4)
 
 
-@pytest.mark.parametrize('task_list', task_count_params)
-class TestCount():
-    """API count should return number of tasks in database"""
+def test_count_inc(db_4_tasks):
+    """Adding task to 4 task db should increment count"""
+    t = Task('some job', 'Mark')
+    tasks.add(t)
 
-    def test_count(self, task_list):
-        for task in task_list:
-            tasks.add(task)
-
-        num_tasks = tasks.count()
-
-        assert(num_tasks == len(task_list))
+    assert(tasks.count() == 5)
