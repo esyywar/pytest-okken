@@ -64,7 +64,7 @@ class TasksDB_MongoDB():  # noqa: E801
         self._stop_mongod()
 
     def _start_mongod(self, db_path):
-        self._process = subprocess.Popen(['mongod', '--dbpath', db_path],
+        self._process = subprocess.Popen(['mongo', '--dbpath', db_path],
                                          stdout=open(os.devnull, 'wb'),
                                          stderr=subprocess.STDOUT)
         assert self._process, "mongod process failed to start"

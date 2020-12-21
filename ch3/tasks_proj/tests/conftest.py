@@ -3,11 +3,11 @@ import tasks
 from tasks import Task
 
 
-@pytest.fixture(scope='session', autouse=True)
-def init_tasks_db(tmpdir_factory):
+@pytest.fixture(scope='session', autouse=True, params=['tiny', 'mongo'])
+def init_tasks_db(tmpdir_factory, request):
     """Connect to db before testing, disconnect after"""
     temp_dir = tmpdir_factory.mktemp('temp')
-    tasks.start_tasks_db(str(temp_dir), 'tiny')
+    tasks.start_tasks_db(str(temp_dir), request.param)
 
     # Yield and allow testing to happend
     yield

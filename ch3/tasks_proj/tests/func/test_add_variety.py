@@ -3,13 +3,25 @@ import tasks
 from tasks import Task
 
 
-task_test_params = [
-    Task('sleep', done = True), 
+task_test_params = (
+    Task('sleep', done=True), 
     Task('my job', 'rahul'), 
     Task('go to gym', 'rahul', True),
-    Task('go home', 'jeezy', False)]
+    Task('go home', 'jeezy', False))
 
-task_test_params_ids = ["Task({},{},{})".format(t.summary, t.owner, t.done) for t in task_test_params]
+task_test_params_ids = tuple("Task({},{},{})".format(t.summary, t.owner, t.done) for t in task_test_params)
+
+
+def param_ids(task_item):
+    """Generate readable id for each param task item"""
+    t = task_item
+    return "Task({},{},{})".format(t.summary, t.owner, t.done)
+
+
+@pytest.fixture(params=task_test_params, ids=param_ids)
+def single_task(request):
+    """Single task without id"""
+    return request.param
 
 
 def equivalent_tasks(t1, t2):
@@ -27,17 +39,16 @@ def test_add_task():
     assert(equivalent_tasks(t, t_from_db))
 
 
-@pytest.mark.parametrize('task', task_test_params)
-def test_add_task_2(task):
-    """Parametrized test with 1 param"""
-    t_id = tasks.add(task)
+def test_add_task_2(single_task):
+    """Test using parametrized test fixture"""
+    t_id = tasks.add(single_task)
 
     t_from_db = tasks.get(t_id)
 
-    assert(equivalent_tasks(task, t_from_db))
+    assert(equivalent_tasks(single_task, t_from_db))
 
 
-@pytest.mark.parametrize('task', task_test_params, ids = task_test_params_ids)
+@pytest.mark.parametrize('task', task_test_params, ids=task_test_params_ids)
 def test_add_task_3(task):
     """Parametrized test with 1 param"""
     t_id = tasks.add(task)
@@ -47,7 +58,7 @@ def test_add_task_3(task):
     assert(equivalent_tasks(task, t_from_db))
 
 
-@pytest.mark.parametrize('task', task_test_params, ids = task_test_params_ids)
+@pytest.mark.parametrize('task', task_test_params, ids=task_test_params_ids)
 class TestAdd():
     """Demonstrate class parametrized tests"""
 
