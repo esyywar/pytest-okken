@@ -1,0 +1,7 @@
+{
+  "test_slow_2.py::test_slow[0]": 0.193, 
+  "test_slow_2.py::test_slow[1]": 0.704, 
+  "test_slow_2.py::test_slow[2]": 0.983, 
+  "test_slow_2.py::test_slow[3]": 0.762, 
+  "test_slow_2.py::test_slow[4]": 0.114
+}
