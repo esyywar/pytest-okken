@@ -1,7 +1,7 @@
 [
-  "test_slow_2.py::test_slow[0]", 
-  "test_slow_2.py::test_slow[1]", 
-  "test_slow_2.py::test_slow[2]", 
-  "test_slow_2.py::test_slow[3]", 
+  "test_slow_2.py::test_slow[0]",
+  "test_slow_2.py::test_slow[1]",
+  "test_slow_2.py::test_slow[2]",
+  "test_slow_2.py::test_slow[3]",
   "test_slow_2.py::test_slow[4]"
 ]

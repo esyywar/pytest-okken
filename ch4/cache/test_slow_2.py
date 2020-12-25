@@ -34,9 +34,10 @@ def check_duration(request, duration_cache):
     duration = (datetime.datetime.now() - start_time).total_seconds()
     d.curr[nodeId] = duration
 
+    # Assertion fail in fixture gives ERROR and not FAIL
     if d.last.get(nodeId) is not None:
         error_str = 'Test duration is over 2x previous duration.'
-        assert duration <= 2 * d.last[nodeId]
+        assert duration <= 2 * d.last[nodeId], error_str
     
 
 

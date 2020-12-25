@@ -11,7 +11,6 @@ def read_player_prefs():
 
 def write_players_prefs(prefs):
     full_path = os.path.expanduser('~/players.json')
-    print(full_path)
     with open(full_path, 'w') as f:
         json.dump(prefs, f, indent=4)
 
